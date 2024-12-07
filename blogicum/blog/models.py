@@ -7,22 +7,29 @@ from core.models import BlogAbstracModel
 
 User = get_user_model()
 
-TEXT_LIMIT = 20
+LIMIT = 20
 
 
 class Location(BlogAbstracModel):
+    """Класс модели Location в базе данных."""
+
     name = models.CharField(max_length=256,
                             verbose_name='Название места')
 
     class Meta:
+        """Класс метаданных."""
+
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
 
     def __str__(self):
-        return self.name[:TEXT_LIMIT]
+        """Описание класса."""
+        return self.name[:LIMIT]
 
 
 class Category(BlogAbstracModel):
+    """Класс модели Category в базе данных."""
+
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     description = models.TextField(verbose_name='Описание')
     slug = models.SlugField(
@@ -36,14 +43,19 @@ class Category(BlogAbstracModel):
     )
 
     class Meta:
+        """Класс метаданных."""
+
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
 
     def __str__(self):
-        return self.title[:TEXT_LIMIT]
+        """Описание класса."""
+        return self.title[:LIMIT]
 
 
 class Post(BlogAbstracModel):
+    """Класс модели Post в базе данных."""
+
     title = models.CharField(max_length=256, verbose_name='Заголовок')
     text = models.TextField(verbose_name='Текст')
     pub_date = models.DateTimeField(default=timezone.now,
@@ -66,18 +78,24 @@ class Post(BlogAbstracModel):
     image = models.ImageField('Фото', upload_to='post_images', blank=True)
 
     class Meta:
+        """Класс метаданных."""
+
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
         default_related_name = 'posts'
 
     def get_absolute_url(self):
+        """Получает абсолютную ссылку."""
         return reverse('blog:post_detail', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.title[:TEXT_LIMIT]
+        """Описание класса."""
+        return self.title[:LIMIT]
 
 
 class Comment(models.Model):
+    """Класс модели Comment в базе данных."""
+
     text = models.TextField('Комментарий')
     post = models.ForeignKey(Post,
                              on_delete=models.CASCADE,
@@ -86,7 +104,10 @@ class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
+        """Класс метаданных."""
+
         ordering = ('created_at',)
 
     def __str__(self):
-        return self.text[:TEXT_LIMIT]
+        """Описание класса."""
+        return self.text[:LIMIT]

@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic.edit import CreateView
+from django.contrib.auth.views import LogoutView
 
 handler403 = "pages.views.permission_denied"
 handler404 = "pages.views.page_not_found"

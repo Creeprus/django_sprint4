@@ -4,8 +4,11 @@ from blog.models import Comment, Post
 
 
 class PostForm(forms.ModelForm):
+    """Класс формы для постов."""
 
     class Meta:
+        """Класс метаданных."""
+
         model = Post
         exclude = ('author',)
         widgets = {
@@ -17,7 +20,10 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    """Класс комментариев для постов."""
 
     class Meta:
+        """Класс метаданных."""
+
         model = Comment
         fields = ('text',)
