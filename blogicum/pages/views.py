@@ -9,6 +9,7 @@ class AboutPageView(TemplateView):
 class RulesPageView(TemplateView):
     template_name = 'pages/rules.html'
 
+
 def permission_denied(request, exception):
     return render(request, "pages/403.html", status=403)
 
